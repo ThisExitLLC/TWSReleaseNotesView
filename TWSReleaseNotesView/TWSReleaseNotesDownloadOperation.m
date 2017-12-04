@@ -73,7 +73,9 @@ static const NSInteger kTWSReleaseNotesDownloadOperationDecodeErrorCode = 0;
     [self didChangeValueForKey:@"isExecuting"];
     
     // Toggle network activity indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:isExecuting];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:isExecuting];
+    }];
 }
 
 - (void)setIsFinished:(BOOL)isFinished
